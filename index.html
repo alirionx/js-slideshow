@@ -20,6 +20,18 @@
       <div v-for="(pic, idx) in pics" :key="idx" @click="set_pic(idx)" v-bind:class="{dot:idx!=curPic, dotActive:idx==curPic }"></div>
     </div>
   </div>
+  <select class="intervalSelect" v-model="intervalDuration" @change="start_interval">
+    <option value="1000">1 Sekunde</option>
+    <option value="2000">2 Sekunde</option>
+    <option value="3000">3 Sekunde</option>
+    <option value="4000">4 Sekunde</option>
+    <option value="5000">5 Sekunde</option>
+    <option value="6000">6 Sekunde</option>
+    <option value="7000">7 Sekunde</option>
+    <option value="8000">8 Sekunde</option>
+    <option value="9000">9 Sekunde</option>
+    <option value="10000">10 Sekunde</option>
+  </select>
 </div>
 
 <script>
@@ -44,6 +56,7 @@ var myObject = new Vue({
       "pic_13.jpg",
     ],
     init:true,
+    intervalDuration: "3000",
     chkInterval: false,
     curPic: 0,
     mode: "fade",
@@ -89,7 +102,7 @@ var myObject = new Vue({
     },
     start_interval(){
       this.stop_interval();
-      this.chkInterval = setInterval(this.pic_next, 3000);
+      this.chkInterval = setInterval(this.pic_next, parseInt(this.intervalDuration));
     },
     stop_interval(){
       clearInterval(this.chkInterval);
